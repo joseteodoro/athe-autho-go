@@ -9,6 +9,12 @@ type NamedEntity struct {
 	Description string
 }
 
+type ReadWriteEntity struct {
+	CanRead  bool `gorm:"not null; default:false"`
+	CanWrite bool `gorm:"not null; default:false"`
+	CanAdmin bool `gorm:"not null; default:false"`
+}
+
 type BaseEntity struct {
 	gorm.Model
 	Uuid    string `gorm:"not null"`
@@ -23,8 +29,10 @@ type Realm struct {
 
 type User struct {
 	BaseEntity
-	Username string `gorm:"not null"`
-	Password string `gorm:"not null"`
+	Username   string      `gorm:"not null"`
+	Password   string      `gorm:"not null"`
+	Groups     []UserGroup `gorm:"many2many:user_group_membership;"`
+	Attributes []Attribute `gorm:"many2many:user_attribute_membership;"`
 }
 
 type UserGroup struct {
@@ -34,17 +42,19 @@ type UserGroup struct {
 
 type UserGroupMembership struct {
 	BaseEntity
+	ReadWriteEntity
 	UserID      uint `gorm:"not null"`
 	UserGroupID uint `gorm:"not null"`
 }
 
-type UserRoleMembership struct {
+type UserAttributeMembership struct {
 	BaseEntity
-	UserID uint `gorm:"not null"`
-	RoleID uint `gorm:"not null"`
+	ReadWriteEntity
+	UserID      uint `gorm:"not null"`
+	AttributeID uint `gorm:"not null"`
 }
 
-type Role struct {
+type Attribute struct {
 	BaseEntity
 	NamedEntity
 }

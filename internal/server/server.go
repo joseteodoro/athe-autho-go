@@ -1,7 +1,8 @@
 package server
 
 import (
-	"net/http"
+	"athe-autho-go/api/routes"
+	"athe-autho-go/internal/configs"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -11,18 +12,15 @@ import (
 type EmptyStruct struct{}
 
 func NewServer() *gin.Engine {
+	config := configs.NewSecurityConfig()
 	r := gin.Default()
 	// configure session to use cookies
-	store := cookie.NewStore([]byte("secret"))
-	r.Use(sessions.Sessions("mysession", store))
+	store := cookie.NewStore([]byte(config.CookieSecret))
+	r.Use(sessions.Sessions("hypersession", store))
 
+	r.Static("/static", "./static")
 	r.LoadHTMLGlob("templates/*.html")
-	// page routes
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "./templates/index.html", EmptyStruct{})
-	})
-
-	// Implement login route here
-	// ...
+	routes.RegisterAPIs(r)
+	routes.RegisterPages(r)
 	return r
 }

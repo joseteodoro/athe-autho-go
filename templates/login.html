@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="/static/5.3.bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+    <style type="text/css">
+      .content {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin-top: 5%;
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+      .menu-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .field {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+      .small-field {
+        width: 100px;
+      }
+      .large-field {
+        width: 300px;
+      }
+      .pages {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+      }
+    </style>
+    <title>Login Page</title>
+    <style type="text/css">
+      .centralize {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: space-around;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="card" style="width: 20rem">
+        <div class="card-body centralize">
+          <h5 class="card-title">Login</h5>
+          <form class="centralize" action="/login" method="POST">
+            <div class="form-group">
+              <input
+                class="shadow-sm rounded"
+                type="text"
+                name="Username"
+                id="username"
+                placeholder="Username"
+                required="required"
+                autocomplete="username"
+                {{if .Username}}
+                   value="{{.Username}}"
+                {{end}}
+              />
+            </div>
+            <br />
+            <div class="form-group">
+              <input
+                class="shadow-sm rounded"
+                type="password"
+                name="Password"
+                id="password"
+                placeholder="Password"
+                required="required"
+              />
+            </div>
+            <br />
+            <div class="form-group">
+              <input
+                class="shadow-sm rounded"
+                type="text"
+                name="Token"
+                id="token"
+                placeholder="Token (if configured)"
+              />
+            </div>
+            <br />
+            <div class="buttons">
+              <a class="btn btn-success" href="/create-guest">Criar conta</a>
+              <button class="shadow-sm rounded btn btn-primary" type="submit">Entrar</button>
+            </div>
+          </form>
+          {{if .Error}}
+            <br/>
+            <div class="alert alert-danger" role="alert">
+                <span>{{.Error}}</span>
+            </div>
+          {{end}}
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="/static/5.3.bootstrap.bundle.min.js"
+    crossorigin="anonymous"
+  ></script>
+</html>

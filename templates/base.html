@@ -1,0 +1,22 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      
+    </style>
+    <title>{{template "title" .}} - Snippetbox</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Snippetbox</a></h1>
+    </header>
+    <main>{{template "main" .}}</main>
+    <footer>Powered by <a href="https://golang.org/">Go</a></footer>
+  </body>
+</html>
+{{end}}

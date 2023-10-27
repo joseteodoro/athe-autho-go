@@ -3,8 +3,15 @@
 <html>
 <head>
     <title>SSR Example</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/5.3.bootstrap.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/static/base.css" crossorigin="anonymous" />
+</head>
 </head>
 <body>
-    <h1>Hello, {{.Name}}!</h1>
+    <div class="alert alert-danger" role="alert">
+        <span>Hello, {{.Username}}</span>
+    </div>
+    <script src="/static/5.3.bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

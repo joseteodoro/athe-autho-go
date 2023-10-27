@@ -1,7 +1,7 @@
 package db
 
 import (
-	"athe-autho-go/configs"
+	"athe-autho-go/internal/configs"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -13,6 +13,6 @@ func Init() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
-
+	db.LogMode(config.ShowSql)
 	return db
 }
